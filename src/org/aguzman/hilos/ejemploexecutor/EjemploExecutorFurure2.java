@@ -4,7 +4,12 @@ import java.util.concurrent.*;
 
 public class EjemploExecutorFurure2 {
     public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
-        ExecutorService executor= Executors.newFixedThreadPool(2);
+        ThreadPoolExecutor executor= (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
+
+        System.out.println("Tamaño del pool: "+executor.getPoolSize());
+        System.out.println("Cantidad de tareas en cola: "+executor.getQueue().size());
+
+
         Callable<String> tarea=()->{
             System.out.println("Inicio de tarea");
             try {
@@ -27,7 +32,8 @@ public class EjemploExecutorFurure2 {
         Future<String> resultados = executor.submit(tarea);
         Future<String>resultado2=executor.submit(tarea);
         Future<Integer>resultado3=executor.submit(tarea2);
-
+        System.out.println("Tamaño del pool: "+executor.getPoolSize());
+        System.out.println("Cantidad de tareas en cola: "+executor.getQueue().size());
         executor.shutdown();
         System.out.println("Continuando con la ejecucion del metodo main");
 
